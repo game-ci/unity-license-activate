@@ -2,7 +2,9 @@ const puppeteer = require('puppeteer')
 const fs = require('fs')
 
 ;(async () => {
-  const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']})
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  })
   const page = await browser.newPage()
 
   const downloadPath = process.cwd()
@@ -44,6 +46,20 @@ const fs = require('fs')
     timeout: 60000,
     waitUntil: 'domcontentloaded'
   })
+
+  const confirmNumber = `${process.argv[5]}`
+  if (confirmNumber !== undefined) {
+    await page.type(
+      'input[id="conversations_tfa_required_form[verify_code]"]',
+      confirmNumber
+    )
+    await page.click('input[type=submit]')
+
+    await page.waitForNavigation({
+      timeout: 60000,
+      waitUntil: 'domcontentloaded'
+    })
+  }
 
   const selectedTypePersonal = 'input[id="type_personal"][value="personal"]'
   await page.evaluate(
