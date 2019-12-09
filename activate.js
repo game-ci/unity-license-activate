@@ -37,10 +37,7 @@ const fs = require('fs')
 
   const confirmNumber = `${process.argv[5]}`
   if (confirmNumber != '') {
-    await page.type(
-      'input[id="conversations_tfa_required_form[verify_code]"]',
-      confirmNumber
-    )
+    await page.type('input[class="verify_code"]', confirmNumber)
     await page.click('input[type=submit]')
 
     await page.waitForNavigation({
