@@ -35,20 +35,8 @@ const fs = require('fs')
     waitUntil: 'domcontentloaded'
   })
 
-  const input = await page.$('input[name="licenseFile"]')
-
-  const alfPath = `${process.argv[4]}`
-  await input.uploadFile(alfPath)
-
-  await page.click('input[name="commit"]')
-
-  await page.waitForNavigation({
-    timeout: 60000,
-    waitUntil: 'domcontentloaded'
-  })
-
   const confirmNumber = `${process.argv[5]}`
-  if (confirmNumber !== undefined) {
+  if (confirmNumber != '') {
     await page.type(
       'input[id="conversations_tfa_required_form[verify_code]"]',
       confirmNumber
@@ -60,6 +48,18 @@ const fs = require('fs')
       waitUntil: 'domcontentloaded'
     })
   }
+
+  const input = await page.$('input[name="licenseFile"]')
+
+  const alfPath = `${process.argv[4]}`
+  await input.uploadFile(alfPath)
+
+  await page.click('input[name="commit"]')
+
+  await page.waitForNavigation({
+    timeout: 60000,
+    waitUntil: 'domcontentloaded'
+  })
 
   const selectedTypePersonal = 'input[id="type_personal"][value="personal"]'
   await page.evaluate(
