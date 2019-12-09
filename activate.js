@@ -26,6 +26,8 @@ const fs = require('fs')
   await page.type('input[type=password]', password)
   await page.click('input[name="commit"]')
 
+  await page.goto('https://license.unity3d.com/manual')
+
   await page.waitForNavigation({
     timeout: 60000,
     waitUntil: 'domcontentloaded'
