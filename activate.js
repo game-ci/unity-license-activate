@@ -34,7 +34,7 @@ const fs = require('fs')
   })
 
   const confirmNumber = `${process.argv[5]}`
-  if (!confirmNumber) {
+  if (confirmNumber != '') {
     await page.type('input[class="verify_code"]', confirmNumber)
     await page.click('input[type=submit]')
 
