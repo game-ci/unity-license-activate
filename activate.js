@@ -17,7 +17,6 @@ const fs = require('fs')
   await page.goto('https://license.unity3d.com/manual')
 
   await page.waitForNavigation({
-    timeout: 60000,
     waitUntil: 'domcontentloaded'
   })
 
@@ -30,7 +29,6 @@ const fs = require('fs')
 
   try {
     await page.waitForNavigation({
-      timeout: 60000,
       waitUntil: 'domcontentloaded'
     })
   } catch (e) {
@@ -44,7 +42,6 @@ const fs = require('fs')
 
     try {
       await page.waitForNavigation({
-        timeout: 60000,
         waitUntil: 'domcontentloaded'
       })
     } catch (e) {
@@ -61,7 +58,6 @@ const fs = require('fs')
 
   try {
     await page.waitForNavigation({
-      timeout: 60000,
       waitUntil: 'domcontentloaded'
     })
   } catch (e) {
@@ -85,7 +81,6 @@ const fs = require('fs')
 
   try {
     await page.waitForNavigation({
-      timeout: 60000,
       waitUntil: 'domcontentloaded'
     })
   } catch (e) {
