@@ -28,20 +28,28 @@ const fs = require('fs')
   await page.type('input[type=password]', password)
   await page.click('input[name="commit"]')
 
-  await page.waitForNavigation({
-    timeout: 60000,
-    waitUntil: 'domcontentloaded'
-  })
+  try {
+    await page.waitForNavigation({
+      timeout: 60000,
+      waitUntil: 'domcontentloaded'
+    })
+  } catch (e) {
+    console.log(`timeout error: wait current page ${page.url()}`)
+  }
 
   const confirmNumber = `${process.argv[5]}`
   if (confirmNumber != '') {
     await page.type('input[class="verify_code"]', confirmNumber)
     await page.click('input[type=submit]')
 
-    await page.waitForNavigation({
-      timeout: 60000,
-      waitUntil: 'domcontentloaded'
-    })
+    try {
+      await page.waitForNavigation({
+        timeout: 60000,
+        waitUntil: 'domcontentloaded'
+      })
+    } catch (e) {
+      console.log(`timeout error: wait current page ${page.url()}`)
+    }
   }
 
   const input = await page.$('input[name="licenseFile"]')
@@ -51,10 +59,14 @@ const fs = require('fs')
 
   await page.click('input[name="commit"]')
 
-  await page.waitForNavigation({
-    timeout: 60000,
-    waitUntil: 'domcontentloaded'
-  })
+  try {
+    await page.waitForNavigation({
+      timeout: 60000,
+      waitUntil: 'domcontentloaded'
+    })
+  } catch (e) {
+    console.log(`timeout error: wait current page ${page.url()}`)
+  }
 
   const selectedTypePersonal = 'input[id="type_personal"][value="personal"]'
   await page.evaluate(
@@ -71,8 +83,14 @@ const fs = require('fs')
 
   await page.click('input[class="btn mb10"]')
 
-  await page.waitForNavigation()
-
+  try {
+    await page.waitForNavigation({
+      timeout: 60000,
+      waitUntil: 'domcontentloaded'
+    })
+  } catch (e) {
+    console.log(`timeout error: wait current page ${page.url()}`)
+  }
   await page.click('input[name="commit"]')
 
   let _ = await (async () => {
