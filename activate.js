@@ -36,7 +36,11 @@ const fs = require('fs')
   }
 
   const confirmNumber = `${process.argv[5]}`
-  if (confirmNumber != '') {
+  if (
+    confirmNumber.value != null &&
+    confirmNumber.value != undefined &&
+    confirmNumber.value.length > 0
+  ) {
     await page.type('input[class="verify_code"]', confirmNumber)
     await page.click('input[type=submit]')
 
