@@ -62,6 +62,7 @@ const fs = require('fs')
 
   try {
     await page.waitForNavigation({
+      timeout: 60000,
       waitUntil: 'domcontentloaded'
     })
   } catch (e) {
