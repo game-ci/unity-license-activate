@@ -14,12 +14,17 @@ const fs = require('fs')
     downloadPath: downloadPath
   })
 
-  await page.goto('https://license.unity3d.com/manual')
-
-  await page.waitForNavigation({
+  const navigationPromise = page.waitForNavigation({
     waitUntil: 'domcontentloaded'
   })
 
+  await page.goto('https://license.unity3d.com/manual')
+
+  await Promise.all([
+    await navigationPromise,
+    await page.waitForSelector('#new_conversations_create_session_form #conversations_create_session_form_password')
+  ])
+  
   const email = `${process.argv[2]}`
   await page.type('input[type=email]', email)
 
@@ -27,13 +32,7 @@ const fs = require('fs')
   await page.type('input[type=password]', password)
   await page.click('input[name="commit"]')
 
-  try {
-    await page.waitForNavigation({
-      waitUntil: 'domcontentloaded'
-    })
-  } catch (e) {
-    console.log(`timeout error: wait current page ${page.url()}`)
-  }
+  await navigationPromise
 
   const confirmNumber = `${process.argv[5]}`
   if (
@@ -41,17 +40,15 @@ const fs = require('fs')
     confirmNumber.value != undefined &&
     confirmNumber.value.length > 0
   ) {
+    await page.waitFor(1000)
+
     await page.type('input[class="verify_code"]', confirmNumber)
     await page.click('input[type=submit]')
 
-    try {
-      await page.waitForNavigation({
-        waitUntil: 'domcontentloaded'
-      })
-    } catch (e) {
-      console.log(`timeout error: wait current page ${page.url()}`)
-    }
+    await navigationPromise
   }
+
+  await page.waitForSelector('.content #licenseFile')
 
   const input = await page.$('input[name="licenseFile"]')
 
@@ -60,23 +57,16 @@ const fs = require('fs')
 
   await page.click('input[name="commit"]')
 
-  try {
-    await page.waitForNavigation({
-      timeout: 60000,
-      waitUntil: 'domcontentloaded'
-    })
-  } catch (e) {
-    console.log(`timeout error: wait current page ${page.url()}`)
-  }
+  await navigationPromise
 
   const selectedTypePersonal = 'input[id="type_personal"][value="personal"]'
+  await page.waitForSelector(selectedTypePersonal)
   await page.evaluate(
     s => document.querySelector(s).click(),
     selectedTypePersonal
   )
 
-  const selectedPersonalCapacity =
-    'input[id="option3"][name="personal_capacity"]'
+  const selectedPersonalCapacity = 'input[id="option3"][name="personal_capacity"]'
   await page.evaluate(
     s => document.querySelector(s).click(),
     selectedPersonalCapacity
@@ -84,13 +74,11 @@ const fs = require('fs')
 
   await page.click('input[class="btn mb10"]')
 
-  try {
-    await page.waitForNavigation({
-      waitUntil: 'domcontentloaded'
-    })
-  } catch (e) {
-    console.log(`timeout error: wait current page ${page.url()}`)
-  }
+  await Promise.all([
+    await navigationPromise,
+    await page.waitFor(1000)
+  ])
+
   await page.click('input[name="commit"]')
 
   let _ = await (async () => {
