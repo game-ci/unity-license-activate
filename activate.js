@@ -22,7 +22,7 @@ const fs = require('fs')
 
   await Promise.all([
     await navigationPromise,
-  await page.waitForSelector('#new_conversations_create_session_form #conversations_create_session_form_password')
+    await page.waitForSelector('#new_conversations_create_session_form #conversations_create_session_form_password')
   ])
   
   const email = `${process.argv[2]}`
