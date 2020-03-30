@@ -48,9 +48,10 @@ const fs = require('fs')
     await navigationPromise
   }
 
-  await page.waitForSelector('.content #licenseFile')
+  const licenseFile = 'input[name="licenseFile"]'
+  await page.waitForSelector(licenseFile)
 
-  const input = await page.$('input[name="licenseFile"]')
+  const input = await page.$(licenseFile)
 
   const alfPath = `${process.argv[4]}`
   await input.uploadFile(alfPath)
