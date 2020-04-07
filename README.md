@@ -12,6 +12,12 @@ You need a .alf file, so save it from UnityHub for example.
 
 `SAVE LICENSE REQUEST` button to save the file.
 
+To create an .alf in a terminal, use the
+
+https://docs.unity3d.com/Manual/CommandLineArguments.html
+
+`/Applications/Unity/Unity.app/Contents/MacOS/Unity -batchmode -createManualActivationFile`
+
 ## usage
 
 `node activate.js $email $password $alf_file_path`
