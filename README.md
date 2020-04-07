@@ -1,7 +1,26 @@
 # Unity License Activate
 
+A tool to automate the manual activation of unity license using puppeteer
+
+https://license.unity3d.com/manual
+
+Get your environment ready for node.js and npm.
+
+You need a .alf file, so save it from UnityHub for example.
+
+![img](./img/sampleImage.png)
+
+`SAVE LICENSE REQUEST` button to save the file.
+
+## usage
+
 `node activate.js $email $password $alf_file_path`
 
-ifneed Two-factor authentication
+Replace it with your own Unity account's email and password.
+Also, add the path to the .alf file you created at the end.
+
+If two-factor authentication is required, please add the two-factor authentication code at the end.
 
 `node activate.js $email $password $alf_file_path $auth_code`
+
+After the execution of the command, the .ulf file will be saved in the root of the repository.
