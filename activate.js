@@ -49,13 +49,13 @@ const fs = require('fs')
   }
 
   const licenseFile = 'input[name="licenseFile"]'
-  await page.waitForSelector(licenseFile)
+  await page.waitFor(10000)
 
   const input = await page.$(licenseFile)
-
+  
   const alfPath = `${process.argv[4]}`
   await input.uploadFile(alfPath)
-
+  
   await page.click('input[name="commit"]')
 
   await navigationPromise
