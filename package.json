@@ -1,14 +1,32 @@
 {
   "name": "unity-license-activate",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "./lib/activate.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcs090218/unity-license-activate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jcs090218/unity-license-activate/issues"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "MizoTake & Jen-Chieh Shen",
+  "license": "apache-2.0",
   "dependencies": {
     "puppeteer": "^2.0.0"
+  },
+  "files": [
+    "lib"
+  ],
+  "homepage": "https://github.com/jcs090218/unity-license-activate",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {},
+  "bin": {
+    "unity-license-activate": "./lib/cli.js"
   }
 }
