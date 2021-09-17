@@ -1,6 +1,6 @@
 {
   "name": "unity-license-activate",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "./lib/activate.js",
   "repository": {
@@ -15,6 +15,7 @@
   },
   "author": "MizoTake & Jen-Chieh Shen",
   "license": "apache-2.0",
+  "preferGlobal": true,
   "dependencies": {
     "puppeteer": "^2.0.0"
   },
