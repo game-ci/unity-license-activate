@@ -1,6 +1,6 @@
 {
   "name": "unity-license-activate",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "",
   "main": "./lib/activate.js",
   "repository": {
