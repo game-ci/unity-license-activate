@@ -9,6 +9,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 > Released N/A
 
 * Correct CLI description.
+* Use inject insert instead of keyboard type.
 
 ## 0.1.0
 > Released Sep 17, 2021
