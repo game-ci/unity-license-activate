@@ -21,9 +21,18 @@ https://docs.unity3d.com/Manual/CommandLineArguments.html
 
 `/Applications/Unity/Unity.app/Contents/MacOS/Unity -batchmode -createManualActivationFile`
 
-## usage
+## 🔨 Usage
 
-`node activate.js $email $password $alf_file_path`
+```
+usage : unity-license-activate EMAIL [EMAIL ...] PASSWORD [PASSWORD ...] ALF [ALF ...]
+
+Unity License Activate : Activate Unity license through CLI.
+
+positional arguments:
+  EMAIL          Username or Email you use to register for Unity account
+  PASSWORD       Password to login Unity account
+  ALF            Unity activation license file path
+```
 
 Replace it with your own Unity account's email and password.
 Also, add the path to the .alf file you created at the end.
