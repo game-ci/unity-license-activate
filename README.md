@@ -38,6 +38,8 @@ jobs:
         run: unity-license-activate "${{ secrets.UNITY_EMAIL }}" "${{ secrets.UNITY_PASSWORD }}" "${{ needs.request_alf.outputs.alf }}"
 ```
 
+Check out the full example [here](./examples/build.yml).
+
 ## 📇 CLI
 
 ```
