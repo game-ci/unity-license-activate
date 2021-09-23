@@ -40,6 +40,19 @@ jobs:
 
       - name: Activate the license
         run: unity-license-activate "${{ secrets.UNITY_EMAIL }}" "${{ secrets.UNITY_PASSWORD }}" "${{ needs.request_alf.outputs.alf }}"
+
+      - name: Read ulf
+        id: ulfRead
+        uses: juliangruber/read-file-action@v1.1.4
+        with:
+          path: ${{ env.ULF_FILE }}
+
+      - name: Update secret UNITY_LICENSE
+        uses: hmanzur/actions-set-secret@v2.0.0
+        with:
+          name: 'UNITY_LICENSE'
+          value: '${{ steps.ulfRead.outputs.content }}'
+          token: ${{ secrets.ACCESS_TOKEN }}
 ```
 
 See the full example [here](https://github.com/jcs090218/JCSUnity/blob/master/.github/workflows/build.yml).
