@@ -12,6 +12,8 @@ likely would have to repeast the step [Activation - Personal License](https://ga
 in order to keep the CI running. Thankfully, you can use this tool to constantly
 activate a new license from Unity's licensing system.
 
+![ma](./etc/ma.png)
+
 ## 🔨 How to use?
 
 You can use this tools with any CI/CD system as long as you have the [Node](https://nodejs.org/en/)
