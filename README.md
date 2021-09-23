@@ -6,12 +6,36 @@
 
 This is a fork from [MizoTake/unity-license-activate](https://github.com/MizoTake/unity-license-activate).
 
-For Unity personal license (free version) , you most likely would have to renew
-it every period of time. Then you would have to repeat the step [Activation - Personal License](https://game.ci/docs/github/activation#personal-license)
-after some times. This tool is designed to use with [GameCI](https://game.ci/),
-so you can do the CI/CD tasks without bothering by the Unity’s licensing system.
+This tool is design to use with [GameCI](https://game.ci/) and personal license
+(free version) users. Personal license will expire after some times, then you most
+likely would have to repeast the step [Activation - Personal License](https://game.ci/docs/github/activation#personal-license)
+in order to keep the CI running. Thankfully, you can use this tool to constantly
+activate a new license from Unity's licensing system.
 
-## 🔨 Usage
+## GitHub Actions
+
+```yml
+jobs:
+  acquire_ulf:
+    name: Acquire .ulf file 🔑
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install node package, `unity-license-activate`
+        run: npm install --global unity-license-activate
+
+      - name: Activate the license
+        run: unity-license-activate "${{ secrets.UNITY_EMAIL }}" "${{ secrets.UNITY_PASSWORD }}" "${{ needs.request_alf.outputs.alf }}"
+```
+
+## 🔨 CLI
 
 ```
 usage : unity-license-activate EMAIL [EMAIL ...] PASSWORD [PASSWORD ...] ALF [ALF ...]
