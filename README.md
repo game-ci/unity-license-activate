@@ -12,7 +12,10 @@ likely would have to repeast the step [Activation - Personal License](https://ga
 in order to keep the CI running. Thankfully, you can use this tool to constantly
 activate a new license from Unity's licensing system.
 
-## GitHub Actions
+## 🔨 How to use?
+
+You can use this tools with any CI/CD system as long as you have the [Node](https://nodejs.org/en/)
+environment set up! Here is an example for GitHub Actions.
 
 ```yml
 jobs:
@@ -35,7 +38,7 @@ jobs:
         run: unity-license-activate "${{ secrets.UNITY_EMAIL }}" "${{ secrets.UNITY_PASSWORD }}" "${{ needs.request_alf.outputs.alf }}"
 ```
 
-## 🔨 CLI
+## 📇 CLI
 
 ```
 usage : unity-license-activate EMAIL [EMAIL ...] PASSWORD [PASSWORD ...] ALF [ALF ...]
