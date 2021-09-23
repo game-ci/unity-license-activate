@@ -12,7 +12,9 @@ likely would have to repeast the step [Activation - Personal License](https://ga
 in order to keep the CI running. Thankfully, you can use this tool to constantly
 activate a new license from Unity's licensing system.
 
-![ma](./etc/ma.png)
+<p align="center">
+  <img src="./etc/ma.png"/>
+</p>
 
 ## 🔨 How to use?
 
