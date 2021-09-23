@@ -40,7 +40,7 @@ jobs:
 
 See the full example [here](./examples/build.yml).
 
-## 📇 CLI
+## 📇 Command Line Arguments
 
 ```
 usage : unity-license-activate EMAIL [EMAIL ...] PASSWORD [PASSWORD ...] ALF [ALF ...]
