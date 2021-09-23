@@ -6,9 +6,10 @@
 
 This is a fork from [MizoTake/unity-license-activate](https://github.com/MizoTake/unity-license-activate).
 
-## ❓ Why?
-
-This is design to use with [GameCI](https://game.ci/).
+For Unity personal license (free version) , you most likely would have to renew
+it every period of time. Then you would have to repeat the step [Activation - Personal License](https://game.ci/docs/github/activation#personal-license)
+after some times. This tool is designed to use with [GameCI](https://game.ci/),
+so you can do the CI/CD tasks without bothering by the Unity’s licensing system.
 
 ## 🔨 Usage
 
@@ -23,6 +24,6 @@ positional arguments:
   ALF            Unity activation license file path
 ```
 
-https://license.unity3d.com/manual
+## 🔗 Links
 
-
+* https://license.unity3d.com/manual
