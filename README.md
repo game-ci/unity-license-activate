@@ -55,7 +55,7 @@ jobs:
           token: ${{ secrets.ACCESS_TOKEN }}
 ```
 
-See the full example [here](https://github.com/jcs090218/JCSUnity/blob/master/.github/workflows/build.yml).
+See the full example [here](https://github.com/jcs090218/JCSUnity/blob/master/.github/workflows/license.yml).
 
 ## 📇 Command Line Arguments
 
