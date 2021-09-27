@@ -84,8 +84,8 @@ You should have 3 ~ 4 GitHub secrets to correctly set up the entire workflow.
 * `UNITY_EMAIL` - Email address that you use to login to Unity
 * `UNITY_PASSWORD` - Password that you use to login to Unity
 * `ACCESS_TOKEn` - Use to update secret `UNITY_LICENSE`, see [hmanzur/actions-set-secret#token](https://github.com/hmanzur/actions-set-secret#token)
-* `EMAIL_PASSWORD` (optional) - Use to get pass Unity's Two Factor Authentication
-system, `UNITY_PASSWORD` is used by default assuming your email password is the same.
+* `EMAIL_PASSWORD` (optional) - Use to get pass Unity's Two Factor Authentication,
+`UNITY_PASSWORD` is used by default assuming your email password is the same.
 
 ## 🩺 Error handling
 
