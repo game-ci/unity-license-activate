@@ -57,6 +57,17 @@ jobs:
 
 See the full example [here](https://github.com/jcs090218/JCSUnity/blob/master/.github/workflows/license.yml).
 
+## 🔐 Two Factor Authentication (TFA)
+
+Unity requires you to enter a 6 digit verification code from your email. To get
+pass this, you would have to install [unity-verify-code](https://github.com/jcs090218/unity-verify-code)
+in your workflow and follow the steps [here](https://github.com/jcs090218/unity-verify-code#-prerequisite).
+
+```yml
+      - name: Install node package, `unity-verify-code`
+        run: npm install --global unity-verify-code
+```
+
 ## 🩺 Error handling
 
 For some reason, if this plugin does not work. Try configure your workflow file
