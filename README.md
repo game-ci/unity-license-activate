@@ -79,7 +79,7 @@ The program generates a `error.png` file if something went wrong. Then you can
 download and see what's the last step before the program is exited.
 
 <p align="center">
-  <img src="./etc/error_artifact.png"/>
+  <img src="./etc/error_artifact.png" width="75%" height="75%"/>
 </p>
 
 ## 📇 Command Line Arguments
