@@ -57,6 +57,30 @@ jobs:
 
 See the full example [here](https://github.com/jcs090218/JCSUnity/blob/master/.github/workflows/license.yml).
 
+## 🩺 Error handling
+
+For some reason, if this plugin does not work. Try configure your workflow file
+like this,
+
+```yml
+      - name: Activate the license
+	    continue-on-error: true        # Add this line to get pass the error flag
+        run: unity-license-activate "${{ secrets.UNITY_EMAIL }}" "${{ secrets.UNITY_PASSWORD }}" "${{ needs.request_alf.outputs.alf }}"
+
+      - name: Upload error screenshot
+        uses: actions/upload-artifact@v1
+        with:
+          name: screenshot_error
+          path: error.png
+```
+
+The program generates a `error.png` file if something went wrong. Then you can
+download and see what's the last step before the program is exited.
+
+<p align="center">
+  <img src="./etc/error_artifact.png"/>
+</p>
+
 ## 📇 Command Line Arguments
 
 ```
