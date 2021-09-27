@@ -64,7 +64,7 @@ like this,
 
 ```yml
       - name: Activate the license
-	    continue-on-error: true        # Add this line to get pass the error flag
+        continue-on-error: true        # Add this line to get pass the error flag
         run: unity-license-activate "${{ secrets.UNITY_EMAIL }}" "${{ secrets.UNITY_PASSWORD }}" "${{ needs.request_alf.outputs.alf }}"
 
       - name: Upload error screenshot
