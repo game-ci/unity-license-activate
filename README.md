@@ -84,7 +84,7 @@ download and see what's the last step before the program is exited.
 
 ## 📇 Command Line Arguments
 
-```
+```console
 usage : unity-license-activate EMAIL [EMAIL ...] PASSWORD [PASSWORD ...] ALF [ALF ...]
 
 Unity License Activate : Activate Unity license through CLI.
