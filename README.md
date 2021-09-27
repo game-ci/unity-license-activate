@@ -67,6 +67,7 @@ like this,
         continue-on-error: true        # Add this line to get pass the error flag
         run: unity-license-activate "${{ secrets.UNITY_EMAIL }}" "${{ secrets.UNITY_PASSWORD }}" "${{ needs.request_alf.outputs.alf }}"
 
+      # Add the error handling step here!
       - name: Upload error screenshot
         uses: actions/upload-artifact@v1
         with:
