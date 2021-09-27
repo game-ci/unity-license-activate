@@ -68,7 +68,7 @@ like this,
         run: unity-license-activate "${{ secrets.UNITY_EMAIL }}" "${{ secrets.UNITY_PASSWORD }}" "${{ needs.request_alf.outputs.alf }}"
 
       # Add the error handling step here!
-      - name: Upload error screenshot
+      - name: 🩺 Upload error screenshot
         uses: actions/upload-artifact@v1
         with:
           name: screenshot_error
