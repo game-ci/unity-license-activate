@@ -69,6 +69,24 @@ in your workflow and follow the steps [here](https://github.com/jcs090218/unity-
         run: npm install --global unity-verify-code
 ```
 
+If you have different password from Unity account and Email account, you would
+need to add `--password` flag to it.
+
+```yml
+      - name: Activate the license
+        run: unity-license-activate ... --password "${{ secrets.EMAIL_PASSWORD }}"
+```
+
+## ㊙️ Secrets
+
+You should have 3 ~ 4 GitHub secrets to correctly set up the entire workflow.
+
+* `UNITY_EMAIL` - Email address that you use to login to Unity
+* `UNITY_PASSWORD` - Password that you use to login to Unity
+* `ACCESS_TOKEn` - Use to update secret `UNITY_LICENSE`, see https://github.com/hmanzur/actions-set-secret#token
+* `EMAIL_PASSWORD` (optional) - Use to get pass Unity's Two Factor Authentication
+system, `UNITY_PASSWORD` is used by default assuming your email password is the same.
+
 ## 🩺 Error handling
 
 For some reason, if this plugin does not work. Try configure your workflow file
