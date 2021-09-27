@@ -1,9 +1,11 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Release](https://img.shields.io/github/release/jcs090218/unity-license-activate.svg?logo=github)](https://github.com/jcs090218/unity-license-activate/releases/latest)
 [![npm](https://img.shields.io/npm/v/unity-license-activate?logo=npm&color=green)](https://www.npmjs.com/package/unity-license-activate)
-[![dependencies Status](https://status.david-dm.org/gh/jcs090218/unity-license-activate.svg)](https://david-dm.org/jcs090218/unity-license-activate)
 
 # unity-license-activate
 > A tool to automate the manual activation of unity license using puppeteer
+
+[![dependencies Status](https://status.david-dm.org/gh/jcs090218/unity-license-activate.svg)](https://david-dm.org/jcs090218/unity-license-activate)
 
 This is a fork from [MizoTake/unity-license-activate](https://github.com/MizoTake/unity-license-activate).
 
