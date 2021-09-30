@@ -96,9 +96,12 @@ For some reason, if this plugin does not work. Try configure your workflow file
 like this,
 
 ```yml
+      - name: Activate the license
+        continue-on-error: true        # Add this line to get pass the error flag
+        run: unity-license-activate "${{ secrets.UNITY_EMAIL }}" "${{ secrets.UNITY_PASSWORD }}" "${{ needs.request_alf.outputs.alf }}"
+
       # Add the error handling step here!
       - name: 🩺 Upload error screenshot
-        continue-on-error: true
         uses: actions/upload-artifact@v1
         with:
           name: screenshot_error
