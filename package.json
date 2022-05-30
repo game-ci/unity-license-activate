@@ -1,14 +1,14 @@
 {
   "name": "unity-license-activate",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "",
   "main": "./lib/activate.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jcs090218/unity-license-activate.git"
+    "url": "git+https://github.com/game-ci/unity-license-activate.git"
   },
   "bugs": {
-    "url": "https://github.com/jcs090218/unity-license-activate/issues"
+    "url": "https://github.com/game-ci/unity-license-activate/issues"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,7 +22,7 @@
   "files": [
     "lib"
   ],
-  "homepage": "https://github.com/jcs090218/unity-license-activate#readme",
+  "homepage": "https://github.com/game-ci/unity-license-activate#readme",
   "directories": {
     "lib": "lib"
   },
