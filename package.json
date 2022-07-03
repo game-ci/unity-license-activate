@@ -17,6 +17,7 @@
   "license": "apache-2.0",
   "preferGlobal": true,
   "dependencies": {
+    "crypto-js": "^4.1.1",
     "puppeteer": "2.0.0"
   },
   "files": [
@@ -26,7 +27,6 @@
   "directories": {
     "lib": "lib"
   },
-  "devDependencies": {},
   "bin": {
     "unity-license-activate": "./lib/cli.js"
   }
