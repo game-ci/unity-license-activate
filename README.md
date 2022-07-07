@@ -61,22 +61,14 @@ See the full example [here](https://github.com/jcs090218/JCSUnity/blob/master/.g
 
 ## 🔐 Two Factor Authentication (TFA)
 
-Unity requires you to enter a 6 digit verification code from your email. To get
-pass this, you would have to install [unity-verify-code](https://github.com/jcs090218/unity-verify-code)
-in your workflow and follow the steps [here](https://github.com/jcs090218/unity-verify-code#-prerequisite)
-(IMAP).
+If you've enabled TFA, Unity requests you to enter a 6 digit verification code.
+This fork drops support for `Phone number` but supports `Authenticator App` (TOTP).
 
-```yml
-      - name: Install node package, `unity-verify-code`
-        run: npm install --global unity-verify-code
-```
-
-If you have different password from Unity account and Email account, you would
-need to add `--password` flag to it.
+To pass the authentication step, specify your authentication key.
 
 ```yml
       - name: Activate the license
-        run: unity-license-activate ... --password "${{ secrets.EMAIL_PASSWORD }}"
+        run: unity-license-activate ... --authenticator-key "${{ secrets.UNITY_TOTP_KEY }}"
 ```
 
 ## ㊙️ Secrets
@@ -85,9 +77,8 @@ You should have 3 ~ 4 GitHub secrets to correctly set up the entire workflow.
 
 * `UNITY_EMAIL` - Email address that you use to login to Unity
 * `UNITY_PASSWORD` - Password that you use to login to Unity
-* `ACCESS_TOKEn` - Use to update secret `UNITY_LICENSE`, see [hmanzur/actions-set-secret#token](https://github.com/hmanzur/actions-set-secret#token)
-* `EMAIL_PASSWORD` (optional) - Use to get pass Unity's Two Factor Authentication,
-`UNITY_PASSWORD` is used by default assuming your passwords are the same.
+* `ACCESS_TOKEN` - Use to update secret `UNITY_LICENSE`, see [hmanzur/actions-set-secret#token](https://github.com/hmanzur/actions-set-secret#token)
+* `UNITY_TOTP_KEY` (optional) - Use to pass Unity's Two Factor Authentication,
 
 ## 🩺 Error handling
 
