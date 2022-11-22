@@ -16,23 +16,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      
+
     - uses: actions/setup-node@v2
       with:
         node-version: '16'
-        
+
     - run: npm install
-      
+
     - name: Test
-      run: make test
-      
+      run: node ./lib/cli.js ${{ secrets.UNITY_EMAIL }} ${{ secrets.PASSWORD }} ${{ secrets.UNITY_EMAIL }} ./test/fixtures/Unity_v2021.1.1f1.alf
+
     - name: Expose error screenshot (if any)
       continue-on-error: true
       uses: actions/upload-artifact@v1
       with:
         name: 'error.png'
         path: 'error.png'
-        
+
     - name: Expose error HTML (if any)
       continue-on-error: true
       uses: actions/upload-artifact@v1
