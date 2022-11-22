@@ -1,0 +1,44 @@
+name: 'CI'
+
+on:
+  pull_request:
+  push:
+    paths-ignore:
+    - '**.md'
+    - '**.org'
+    branches:
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        
+    - run: npm install
+      
+    - name: Test
+      run: make test
+      
+    - name: Expose error screenshot (if any)
+      continue-on-error: true
+      uses: actions/upload-artifact@v1
+      with:
+        name: 'error.png'
+        path: 'error.png'
+        
+    - name: Expose error HTML (if any)
+      continue-on-error: true
+      uses: actions/upload-artifact@v1
+      with:
+        name: 'error.html'
+        path: 'error.html'
