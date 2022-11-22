@@ -24,7 +24,7 @@ jobs:
     - run: npm install
 
     - name: Test
-      run: node ./lib/cli.js ${{ secrets.UNITY_EMAIL }} ${{ secrets.PASSWORD }} ${{ secrets.UNITY_EMAIL }} ./test/fixtures/Unity_v2021.1.1f1.alf
+      run: node ./lib/cli.js ${{ secrets.EMAIL }} ${{ secrets.PASSWORD }} ./test/fixtures/Unity_v2021.1.1f1.alf
 
     - name: Expose error screenshot (if any)
       continue-on-error: true
