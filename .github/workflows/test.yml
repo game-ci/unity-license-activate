@@ -1,13 +1,10 @@
 name: 'CI'
 
 on:
-  pull_request:
   push:
-    paths-ignore:
-    - '**.md'
-    - '**.org'
     branches:
-      - master
+      - main
+  pull_request:
   workflow_dispatch:
 
 concurrency:
