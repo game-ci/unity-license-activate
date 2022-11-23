@@ -31,14 +31,11 @@ jobs:
   acquire_ulf:
     name: Acquire .ulf file 🔑
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
     steps:
-      - name: Set up Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '16'
 
       - name: Install node package, `unity-license-activate`
         run: npm install --global unity-license-activate
