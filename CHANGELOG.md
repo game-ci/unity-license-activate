@@ -11,6 +11,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Correct CLI description.
 * Use inject insert instead of keyboard type.
 * Handle "terms of service" popup when appeared (#71)
+* Fix no follow (#75 and #77)
 
 ## 0.1.0
 > Released Sep 17, 2021
