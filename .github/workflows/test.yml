@@ -27,14 +27,14 @@ jobs:
 
     - name: Expose error screenshot (if any)
       continue-on-error: true
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: 'error.png'
         path: 'error.png'
 
     - name: Expose error HTML (if any)
       continue-on-error: true
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: 'error.html'
         path: 'error.html'
