@@ -1,6 +1,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Release](https://img.shields.io/github/tag/jcs090218/unity-license-activate.svg?label=release&logo=github)](https://github.com/jcs090218/unity-license-activate/releases/latest)
 [![npm](https://img.shields.io/npm/v/unity-license-activate?logo=npm&color=green)](https://www.npmjs.com/package/unity-license-activate)
+[![npm-dt](https://img.shields.io/npm/dt/unity-license-activate.svg)](https://npmcharts.com/compare/unity-license-activate?minimal=true)
 [![npm-dm](https://img.shields.io/npm/dm/unity-license-activate.svg)](https://npmcharts.com/compare/unity-license-activate?minimal=true)
 
 # unity-license-activate
