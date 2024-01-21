@@ -1,0 +1,134 @@
+name: Run tests
+on:
+  push: {}
+jobs:
+  linux-test:
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        unityVersion:
+          - 2021.3.16f1
+          - 2020.3.43f1
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Install UnityEditor
+        run: |
+          sudo docker cp $(docker create --rm unityci/editor:${{ matrix.unityVersion }}-base-1):/opt/unity /opt/unity
+          sudo chown -R $(id -u):$(id -g) /opt/unity
+
+          echo -e '#!/bin/bash\nxvfb-run -ae /dev/stdout /opt/unity/Editor/Unity -batchmode "$@"' | sudo tee -a /usr/bin/unity-editor
+          sudo chmod +x /usr/bin/unity-editor
+
+      - name: Generate a license activation file
+        run: |
+          unity-editor -quit -createManualActivationFile -logFile || true
+
+      - name: Request a Unity license file
+        env:
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_TOTP_KEY: ${{ secrets.UNITY_TOTP_KEY }}
+        run: |
+          npm install
+          npm install -g .
+          unity-license-activate "$UNITY_EMAIL" "$UNITY_PASSWORD" Unity_v${{ matrix.unityVersion }}.alf --authenticator-key "$UNITY_TOTP_KEY"
+
+      - name: Activate License
+        run: |
+          unity-editor -quit -batchmode -nographics -logFile -manualLicenseFile $(ls Unity_*.ulf) || true
+          rm Unity_*.ulf
+          rm Unity_*.alf
+
+  macos-test:
+    runs-on: macos-12
+    strategy:
+      fail-fast: false
+      matrix:
+        unity:
+          - { version: "2021.3.16f1", changeset: "4016570cf34f" }
+          - { version: "2020.3.43f1", changeset: "75bff06b76bf" }
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Install UnityEditor
+        run: |
+          curl -LO https://beta.unity3d.com/download/${{ matrix.unity.changeset }}/MacEditorInstaller/Unity.pkg
+          sudo installer -package Unity.pkg -target /
+
+      - name: Generate a license activation file
+        run: |
+          /Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -batchmode -createManualActivationFile -logFile || true
+
+      - name: Request a Unity license file
+        env:
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_TOTP_KEY: ${{ secrets.UNITY_TOTP_KEY }}
+        run: |
+          npm install
+          npm install -g .
+          unity-license-activate "${UNITY_EMAIL}" "${UNITY_PASSWORD}" Unity_v${{ matrix.unity.version }}.alf --authenticator-key "${UNITY_TOTP_KEY}"
+
+      - name: Activate License
+        run: |
+          /Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -batchmode -nographics -logFile -manualLicenseFile $(ls Unity_*.ulf) || true
+          rm Unity_*.ulf
+          rm Unity_*.alf
+
+  windows-test:
+    runs-on: windows-2019
+    strategy:
+      fail-fast: false
+      matrix:
+        unity:
+          - { version: "2021.3.16f1", changeset: "4016570cf34f" }
+          - { version: "2020.3.43f1", changeset: "75bff06b76bf" }
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Install UnityHub
+        uses: crazy-max/ghaction-chocolatey@v2
+        with:
+          args: install unity-hub -y
+
+      - name: Install UnityEditor
+        run: |
+          Start-Process -NoNewWindow -Wait -PassThru "C:\Program Files\Unity Hub\Unity Hub.exe" -ArgumentList "-- --headless install --version ${{ matrix.unity.version }} --changeset ${{ matrix.unity.changeset }}"
+          exit 0
+
+      - name: Generate a license activation file
+        run: |
+          Start-Process -NoNewWindow -Wait -PassThru "C:\Program Files\Unity\Hub\Editor\${{ matrix.unity.version }}\Editor\Unity.exe" -ArgumentList "-quit -batchmode -createManualActivationFile -logfile"
+          exit 0
+
+      - name: Request a Unity license file
+        env:
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_TOTP_KEY: ${{ secrets.UNITY_TOTP_KEY }}
+        run: |
+          npm install
+          npm install -g .
+          unity-license-activate "$env:UNITY_EMAIL" "$env:UNITY_PASSWORD" Unity_v${{ matrix.unity.version }}.alf --authenticator-key "$env:UNITY_TOTP_KEY"
+
+      - name: Activate License
+        run: |
+          $ulf_file = Get-Item Unity_*.ulf
+          $process = Start-Process -NoNewWindow -Wait -PassThru "C:\Program Files\Unity\Hub\Editor\${{ matrix.unity.version }}\Editor\Unity.exe" -ArgumentList "-batchmode -nographics -logFile -quit -manualLicenseFile $ulf_file"
+          $ulf_file.Delete()
+
+          $alf_file = Get-Item Unity_*.alf
+          $alf_file.Delete()
+
+          if ($process.ExitCode -ne 1)
+          {
+            exit $process.ExitCode
+          }
