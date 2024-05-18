@@ -130,4 +130,10 @@ positional arguments:
 
 ## 🔗 Links
 
-* https://license.unity3d.com/manual
+- https://license.unity3d.com/manual
+
+## ⚜️ Licence
+
+This repository is [Apache 2.0](./LICENSE) licensed.
+
+This includes all contributions from the community.
