@@ -132,7 +132,7 @@ positional arguments:
 
 - https://license.unity3d.com/manual
 
-## ⚜️ Licence
+## ⚜️ License
 
 This repository is [Apache 2.0](./LICENSE) licensed.
 
