@@ -8,7 +8,6 @@
 > A tool to automate the manual activation of unity license using puppeteer
 
 [![CI](https://github.com/game-ci/unity-license-activate/actions/workflows/test.yml/badge.svg)](https://github.com/game-ci/unity-license-activate/actions/workflows/test.yml)
-[![dependencies Status](https://status.david-dm.org/gh/jcs090218/unity-license-activate.svg)](https://david-dm.org/jcs090218/unity-license-activate)
 
 This is a fork from [MizoTake/unity-license-activate](https://github.com/MizoTake/unity-license-activate).
 
@@ -132,7 +131,7 @@ positional arguments:
 
 - https://license.unity3d.com/manual
 
-## ⚜️ Licence
+## ⚜️ License
 
 This repository is [Apache 2.0](./LICENSE) licensed.
 
