@@ -60,11 +60,36 @@ jobs:
 See the full example [here](https://github.com/jcs090218/JCSUnity/blob/master/.github/workflows/license.yml).
 
 ## 🔐 Two Factor Authentication (TFA)
+Unity requires you to enter a 6 digit verification code when signing in.
+This project supports two types of verification code:
 
-Unity requires you to enter a 6 digit verification code from your email. To get
-pass this, you would have to install [unity-verify-code](https://github.com/jcs090218/unity-verify-code)
-in your workflow and follow the steps [here](https://github.com/jcs090218/unity-verify-code#-prerequisite)
-(IMAP).
+#### Authenticator App (TOTP)
+Authenticator App is the preferred option when TFA is explicitly enabled on an account.
+To get past this, specify your original authenticator key and `unity-license-activate` will generate a TOTP automatically.
+
+```yml
+      - name: Activate the license
+        run: unity-license-activate ... --authenticator-key "${{ secrets.UNITY_TOTP_KEY }}"
+```
+
+#### How to obtain authenticator key
+
+- Login to Unity account and activate new two factor authentication.
+Go to https://id.unity.com/en/settings/tfa/new and click `Start setup`
+![](etc/TOTP/1.png)
+- Select `Authenticator App` and click `Next`
+![](etc/TOTP/2.png)
+- Click `Can't scan the barcode?`.
+Find and save the authenticator key
+![](etc/TOTP/3.png)
+- Verify activation with Google Authenticator. You can also verify using a QR code
+![](etc/TOTP/4.png)
+
+#### Email
+Email is the default option when you have not enabled TFA on your account.
+
+To get past this, you would have to install [unity-verify-code](https://github.com/jcs090218/unity-verify-code)
+in your workflow and follow the steps [here](https://github.com/jcs090218/unity-verify-code#-prerequisite) to allow access to your email inbox (IMAP).
 
 ```yml
       - name: Install node package, `unity-verify-code`
@@ -85,9 +110,10 @@ You should have 3 ~ 4 GitHub secrets to correctly set up the entire workflow.
 
 * `UNITY_EMAIL` - Email address that you use to login to Unity
 * `UNITY_PASSWORD` - Password that you use to login to Unity
-* `ACCESS_TOKEn` - Use to update secret `UNITY_LICENSE`, see [hmanzur/actions-set-secret#token](https://github.com/hmanzur/actions-set-secret#token)
+* `ACCESS_TOKEN` - Use to update secret `UNITY_LICENSE`, see [hmanzur/actions-set-secret#token](https://github.com/hmanzur/actions-set-secret#token)
 * `EMAIL_PASSWORD` (optional) - Use to get pass Unity's Two Factor Authentication,
 `UNITY_PASSWORD` is used by default assuming your passwords are the same.
+* `UNITY_TOTP_KEY` (optional) - Use to pass Unity's Two Factor Authentication,
 
 ## 🩺 Error handling
 
@@ -96,11 +122,11 @@ like this,
 
 ```yml
       - name: Activate the license
-        continue-on-error: true        # Add this line to get pass the error flag
         run: unity-license-activate "${{ secrets.UNITY_EMAIL }}" "${{ secrets.UNITY_PASSWORD }}" "${{ needs.request_alf.outputs.alf }}"
 
       # Add the error handling step here!
       - name: 🩺 Upload error screenshot
+        if: failure()
         uses: actions/upload-artifact@v1
         with:
           name: screenshot_error
