@@ -1,13 +1,13 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Release](https://img.shields.io/github/tag/jcs090218/unity-license-activate.svg?label=release&logo=github)](https://github.com/jcs090218/unity-license-activate/releases/latest)
 [![npm](https://img.shields.io/npm/v/unity-license-activate?logo=npm&color=green)](https://www.npmjs.com/package/unity-license-activate)
+[![npm-dt](https://img.shields.io/npm/dt/unity-license-activate.svg)](https://npmcharts.com/compare/unity-license-activate?minimal=true)
 [![npm-dm](https://img.shields.io/npm/dm/unity-license-activate.svg)](https://npmcharts.com/compare/unity-license-activate?minimal=true)
 
 # unity-license-activate
 > A tool to automate the manual activation of unity license using puppeteer
 
 [![CI](https://github.com/game-ci/unity-license-activate/actions/workflows/test.yml/badge.svg)](https://github.com/game-ci/unity-license-activate/actions/workflows/test.yml)
-[![dependencies Status](https://status.david-dm.org/gh/jcs090218/unity-license-activate.svg)](https://david-dm.org/jcs090218/unity-license-activate)
 
 This is a fork from [MizoTake/unity-license-activate](https://github.com/MizoTake/unity-license-activate).
 
@@ -155,4 +155,10 @@ positional arguments:
 
 ## 🔗 Links
 
-* https://license.unity3d.com/manual
+- https://license.unity3d.com/manual
+
+## ⚜️ License
+
+This repository is [Apache 2.0](./LICENSE) licensed.
+
+This includes all contributions from the community.
