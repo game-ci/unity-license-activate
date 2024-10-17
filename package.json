@@ -18,7 +18,7 @@
   "preferGlobal": true,
   "dependencies": {
     "crypto-js": "^4.1.1",
-    "puppeteer": "^13.7.0"
+    "puppeteer": "^23.6.0"
   },
   "files": [
     "lib"
