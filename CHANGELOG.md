@@ -10,9 +10,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 * Correct CLI description.
 * Use inject insert instead of keyboard type.
-* Handle "terms of service" popup when appeared (#71)
-* Fix no follow (#75 and #77)
-* TOTP Support (#101)
+* Handle "terms of service" popup when appeared ([#71](../../pull/71))
+* Fix no follow ([#75](../../pull/75) and [#77](../../pull/77))
+* TOTP Support ([#101](../../pull/101))
 
 ## 0.1.0
 > Released Sep 17, 2021
