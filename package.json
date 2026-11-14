@@ -16,9 +16,12 @@
   "author": "MizoTake & Jen-Chieh Shen",
   "license": "apache-2.0",
   "preferGlobal": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "dependencies": {
     "crypto-js": "^4.2.0",
-    "puppeteer": "^13.7.0"
+    "puppeteer": "^25.17.0"
   },
   "files": [
     "lib"

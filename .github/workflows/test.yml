@@ -14,16 +14,35 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      EMAIL: ${{ secrets.EMAIL }}
+      PASSWORD: ${{ secrets.PASSWORD }}
     steps:
     - uses: actions/checkout@v7
+
+    - uses: actions/setup-node@v6
+      with:
+        node-version: 24
 
     - name: Install node package, `unity-verify-code`
       run: npm install --global unity-verify-code
 
     - run: npm install
 
+    - name: Check the CLI rejects missing arguments
+      run: |
+        if node ./lib/cli.js; then
+          echo "::error::cli.js exited 0 without arguments"
+          exit 1
+        fi
+
     - name: Test
-      run: node ./lib/cli.js ${{ secrets.EMAIL }} ${{ secrets.PASSWORD }} ./test/fixtures/Unity_v2021.1.1f1.alf
+      if: env.EMAIL != ''
+      run: node ./lib/cli.js "$EMAIL" "$PASSWORD" ./test/fixtures/Unity_v2021.1.1f1.alf
+
+    - name: Note skipped end-to-end test
+      if: env.EMAIL == ''
+      run: echo "::notice::No Unity credentials available to this run (e.g. Dependabot or fork PRs); end-to-end activation was skipped."
 
     - name: Expose error screenshot (if any)
       continue-on-error: true
