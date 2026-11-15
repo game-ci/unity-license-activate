@@ -37,6 +37,7 @@ jobs:
         run: |
           npm install
           npm install -g .
+          npm install -g unity-verify-code
           unity-license-activate "$UNITY_EMAIL" "$UNITY_PASSWORD" Unity_v${{ matrix.unityVersion }}.alf --authenticator-key "$UNITY_TOTP_KEY"
 
       - name: Activate License
@@ -77,6 +78,7 @@ jobs:
         run: |
           npm install
           npm install -g .
+          npm install -g unity-verify-code
           unity-license-activate "${UNITY_EMAIL}" "${UNITY_PASSWORD}" Unity_v${{ matrix.unity.version }}.alf --authenticator-key "${UNITY_TOTP_KEY}"
 
       - name: Activate License
@@ -123,6 +125,7 @@ jobs:
         run: |
           npm install
           npm install -g .
+          npm install -g unity-verify-code
           unity-license-activate "$env:UNITY_EMAIL" "$env:UNITY_PASSWORD" Unity_v${{ matrix.unity.version }}.alf --authenticator-key "$env:UNITY_TOTP_KEY"
 
       - name: Activate License
