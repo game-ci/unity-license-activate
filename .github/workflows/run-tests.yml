@@ -4,6 +4,7 @@ on:
 jobs:
   linux-test:
     runs-on: ubuntu-22.04
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
@@ -47,6 +48,7 @@ jobs:
 
   macos-test:
     runs-on: macos-15-intel
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
@@ -87,6 +89,7 @@ jobs:
 
   windows-test:
     runs-on: windows-2022
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
@@ -100,15 +103,18 @@ jobs:
         with:
           node-version: 24
 
-      - name: Install UnityHub
-        uses: crazy-max/ghaction-chocolatey@v4
-        with:
-          args: install unity-hub -y
-
+      # The Unity Hub headless CLI is deprecated and hangs on fresh runners; use the standalone Unity CLI.
       - name: Install UnityEditor
         run: |
-          Start-Process -NoNewWindow -Wait -PassThru "C:\Program Files\Unity Hub\Unity Hub.exe" -ArgumentList "-- --headless install --version ${{ matrix.unity.version }} --changeset ${{ matrix.unity.changeset }}"
-          exit 0
+          & ([scriptblock]::Create((Invoke-RestMethod https://unity.com/install.ps1))) -Target 1.0.0
+          $unity = Join-Path $env:LOCALAPPDATA "Unity\bin\unity.exe"
+          $editors = "C:\Program Files\Unity\Hub\Editor"
+          New-Item -ItemType Directory -Force -Path $editors | Out-Null
+          & $unity install-path --set $editors --non-interactive
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & $unity install ${{ matrix.unity.version }} --changeset ${{ matrix.unity.changeset }} --accept-eula --non-interactive
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          if (-not (Test-Path "$editors\${{ matrix.unity.version }}\Editor\Unity.exe")) { Write-Error "Unity.exe was not installed"; exit 1 }
 
       - name: Generate a license activation file
         run: |
