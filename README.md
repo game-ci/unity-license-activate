@@ -26,6 +26,8 @@ activate a new license from Unity's licensing system.
 You can use this tools with any CI/CD system as long as you have the [Node](https://nodejs.org/en/)
 environment set up! Here is an example for GitHub Actions.
 
+It needs Node.js 22.12 or newer.
+
 ```yml
 jobs:
   acquire_ulf:
@@ -33,9 +35,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v6
         with:
-          node-version: '16'
+          node-version: 24
 
       - name: Install node package, `unity-license-activate`
         run: npm install --global unity-license-activate
@@ -86,22 +88,21 @@ Find and save the authenticator key
 ![](etc/TOTP/4.png)
 
 #### Email
-Email is the default option when you have not enabled TFA on your account.
+Email is the default option when you have not enabled TFA on your account: after
+signing in, Unity shows a "Security check" page and emails you a verification code.
 
-To get past this, you would have to install [unity-verify-code](https://github.com/jcs090218/unity-verify-code)
-in your workflow and follow the steps [here](https://github.com/jcs090218/unity-verify-code#-prerequisite) to allow access to your email inbox (IMAP).
+This tool reads that code from your inbox over IMAP with
+[unity-verify-code](https://github.com/game-ci/unity-verify-code), which is installed
+along with it. Follow its [prerequisites](https://github.com/game-ci/unity-verify-code#-prerequisite)
+to allow IMAP access to your inbox. It currently knows the IMAP servers of Gmail,
+Outlook/Hotmail, Yahoo, Foxmail and QQ addresses only.
 
-```yml
-      - name: Install node package, `unity-verify-code`
-        run: npm install --global unity-verify-code
-```
-
-If you have different password from Unity account and Email account, you would
-need to add `--password` flag to it.
+If your Unity account and your email account have different passwords, pass the
+email password with `--email-password`:
 
 ```yml
       - name: Activate the license
-        run: unity-license-activate ... --password "${{ secrets.EMAIL_PASSWORD }}"
+        run: unity-license-activate ... --email-password "${{ secrets.EMAIL_PASSWORD }}"
 ```
 
 ## ㊙️ Secrets
@@ -127,14 +128,19 @@ like this,
       # Add the error handling step here!
       - name: 🩺 Upload error screenshot
         if: failure()
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v7
         with:
           name: screenshot_error
           path: error.png
 ```
 
 The program generates a `error.png` file if something went wrong. Then you can
-download and see what's the last step before the program is exited.
+download and see what's the last step before the program is exited. It also logs a
+short summary of the page (field names, button labels, no values) to the job log.
+
+> **Note:** artifacts of public repositories can be downloaded by anyone, and the
+> screenshot may show your account's email address. Upload it only from private
+> repositories, or rely on the logged page summary instead.
 
 <p align="center">
   <img src="./etc/error_artifact.png" width="75%" height="75%"/>

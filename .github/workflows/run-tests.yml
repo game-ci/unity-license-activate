@@ -12,13 +12,15 @@ jobs:
           - 2020.3.43f1
     steps:
       - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v6
         with:
-          ref: ${{ inputs.ref }}
+          node-version: 24
 
       - name: Install UnityEditor
         run: |
-          sudo docker cp $(docker create --rm unityci/editor:${{ matrix.unityVersion }}-base-1):/opt/unity /opt/unity
-          sudo chown -R $(id -u):$(id -g) /opt/unity
+          sudo docker cp "$(docker create --rm unityci/editor:${{ matrix.unityVersion }}-base-1)":/opt/unity /opt/unity
+          sudo chown -R "$(id -u):$(id -g)" /opt/unity
 
           echo -e '#!/bin/bash\nxvfb-run -ae /dev/stdout /opt/unity/Editor/Unity -batchmode "$@"' | sudo tee -a /usr/bin/unity-editor
           sudo chmod +x /usr/bin/unity-editor
@@ -39,12 +41,12 @@ jobs:
 
       - name: Activate License
         run: |
-          unity-editor -quit -batchmode -nographics -logFile -manualLicenseFile $(ls Unity_*.ulf) || true
+          unity-editor -quit -batchmode -nographics -logFile -manualLicenseFile Unity_*.ulf || true
           rm Unity_*.ulf
           rm Unity_*.alf
 
   macos-test:
-    runs-on: macos-12
+    runs-on: macos-15-intel
     strategy:
       fail-fast: false
       matrix:
@@ -53,8 +55,10 @@ jobs:
           - { version: "2020.3.43f1", changeset: "75bff06b76bf" }
     steps:
       - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v6
         with:
-          ref: ${{ inputs.ref }}
+          node-version: 24
 
       - name: Install UnityEditor
         run: |
@@ -77,12 +81,12 @@ jobs:
 
       - name: Activate License
         run: |
-          /Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -batchmode -nographics -logFile -manualLicenseFile $(ls Unity_*.ulf) || true
+          /Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -batchmode -nographics -logFile -manualLicenseFile Unity_*.ulf || true
           rm Unity_*.ulf
           rm Unity_*.alf
 
   windows-test:
-    runs-on: windows-2019
+    runs-on: windows-2022
     strategy:
       fail-fast: false
       matrix:
@@ -91,8 +95,10 @@ jobs:
           - { version: "2020.3.43f1", changeset: "75bff06b76bf" }
     steps:
       - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v6
         with:
-          ref: ${{ inputs.ref }}
+          node-version: 24
 
       - name: Install UnityHub
         uses: crazy-max/ghaction-chocolatey@v4
