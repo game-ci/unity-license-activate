@@ -43,17 +43,3 @@ jobs:
     - name: Note skipped end-to-end test
       if: env.EMAIL == ''
       run: echo "::notice::No Unity credentials available to this run (e.g. Dependabot or fork PRs); end-to-end activation was skipped."
-
-    - name: Expose error screenshot (if any)
-      continue-on-error: true
-      uses: actions/upload-artifact@v7
-      with:
-        name: 'error.png'
-        path: 'error.png'
-
-    - name: Expose error HTML (if any)
-      continue-on-error: true
-      uses: actions/upload-artifact@v7
-      with:
-        name: 'error.html'
-        path: 'error.html'
