@@ -86,23 +86,23 @@ Find and save the authenticator key
 ![](etc/TOTP/4.png)
 
 #### Email
-Email is the default option when you have not enabled TFA on your account.
+Email is the default option when you have not enabled TFA on your account: after
+signing in, Unity shows a "Security check" page and emails you a verification code.
 
-To get past this, you would have to install [unity-verify-code](https://github.com/jcs090218/unity-verify-code)
-in your workflow and follow the steps [here](https://github.com/jcs090218/unity-verify-code#-prerequisite) to allow access to your email inbox (IMAP).
+This tool reads that code from your inbox over IMAP with
+[unity-verify-code](https://github.com/game-ci/unity-verify-code), which is installed
+along with it. Follow its [prerequisites](https://github.com/game-ci/unity-verify-code#-prerequisite)
+to allow IMAP access to your inbox. It currently knows the IMAP servers of Gmail,
+Outlook/Hotmail, Yahoo, Foxmail and QQ addresses only.
 
-```yml
-      - name: Install node package, `unity-verify-code`
-        run: npm install --global unity-verify-code
-```
-
-If you have different password from Unity account and Email account, you would
-need to add `--password` flag to it.
+If your Unity account and your email account have different passwords, pass the
+email password with `--email-password`:
 
 ```yml
       - name: Activate the license
-        run: unity-license-activate ... --password "${{ secrets.EMAIL_PASSWORD }}"
+        run: unity-license-activate ... --email-password "${{ secrets.EMAIL_PASSWORD }}"
 ```
+
 
 ## ㊙️ Secrets
 

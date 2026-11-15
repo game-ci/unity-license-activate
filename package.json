@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "crypto-js": "^4.2.0",
-    "puppeteer": "^25.17.0"
+    "puppeteer": "^25.17.0",
+    "unity-verify-code": "^0.2.4"
   },
   "files": [
     "lib"
